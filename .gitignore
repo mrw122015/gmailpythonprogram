@@ -1,0 +1,34 @@
+
+import smtplib
+User = raw_input("Enter Gmail Email: ")
+Pass = raw_input("Enter Password: ")
+To = raw_input("Sent to who: ")
+sub = raw_input("Subject: ")
+text = raw_input("Email Message: ")
+
+smtpUser = User
+smtpPass = Pass
+
+toAdd = To
+fromAdd = smtpUser
+
+
+subject = sub
+header = 'To: ' + toAdd + '\n' + 'From: ' + fromAdd + '\n' + 'Subject: ' + subject
+body = text
+print "Your Message: \n"
+print header + '\n' + body
+
+
+s = smtplib.SMTP('smtp.gmail.com',587)
+
+s.ehlo()
+s.starttls()
+s.ehlo()
+
+s.login(smtpUser, smtpPass)
+s.sendmail(fromAdd, toAdd, header + '\n\n' + body)
+
+
+
+print 'Message Sent'
